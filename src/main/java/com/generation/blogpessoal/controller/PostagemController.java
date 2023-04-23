@@ -52,11 +52,12 @@ public class PostagemController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem) {
+	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem){
 		if (temaRepository.existsById(postagem.getTema().getId()))
-			return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem));
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem));
+			return ResponseEntity.status(HttpStatus.CREATED)
+					.body(postagemRepository.save(postagem));
+			
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!", null);
 	}
 
 	@PutMapping
